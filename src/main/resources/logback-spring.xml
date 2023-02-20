@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Spring默认日志配置-->
+<configuration>
+    <!--指定生产环境和测试环境的日志地址 不要在LogBack配置中使用相对路径-->
+    <springProfile name="dev">
+        <property name="LOG_HOME" value="C:/Users/whrad/desktop/sigma-mall/logs/"></property>
+    </springProfile>
+    <springProfile name="prd">
+        <property name="LOG_HOME" value="/sigma-mall/logs/"></property>
+    </springProfile>
+
+    <!--控制台的适配器 optional；name 随便取，class不行-->
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+            <!--输出格式：%d日期，%thread线程名，%-5level级别从左显示五个字符宽度，%msg日志消息，%n换行符-->
+                %d{yyyy-MM-dd HH:mm:ss.SSS} {%thread} %-5level %logger{50} - %msg%n
+            </pattern>
+        </layout>
+    </appender>
+    <!--文件配置，以天为单位生成-->
+    <appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>
+                ${LOG_HOME}/sigma-mall.%d{yyyy-MM-dd}.log
+            </FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+                <!--输出格式：%d日期，%thread线程名，%-5level级别从左显示五个字符宽度，%msg日志消息，%n换行符-->
+                %d{yyyy-MM-dd HH:mm:ss.SSS} {%thread} %-5level %logger{50} - %msg%n
+            </pattern>
+        </layout>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+    <root level="info">
+        <appender-ref ref="stdout"></appender-ref>
+        <appender-ref ref="rollingFile"></appender-ref>
+    </root>
+</configuration>

@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/sigma?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false&user=root&password=0611
+#    username: root
+#    password: 0611
+#    ???不清楚为何不可以用单独的账密配置必须加在url后面
+#    ???使用 8 的driver直接启动才会报错
+#    ???8的driver中的cj也能用在mysql5.7中
+
+server:
+  port: 8080

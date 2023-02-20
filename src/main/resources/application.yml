@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: "sigma-mall"
+  profiles:
+    active: dev
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapperGenerated/*.xml, classpath:mybatis/mapper/*.xml
+
+security:
+  password:
+    passwordEncoderLength: 10
+  user:
+    usernameSplitter: ","
+    customerInitial: "c"
+    vendorInitial: "v"
+    adminInitial: "a"
+  jwt:
+    secretKey: "asldkjfhsalkdjhflkasdjhfasadfasdfasdfasdfasdfasdfasdfasdf"
+    tokenExpirationAfterMillis: 60000
+
+mvc:
+  controller:
+    id-splitter: ","
+
